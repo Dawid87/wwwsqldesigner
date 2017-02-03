@@ -1,16 +1,18 @@
 <?php
 	set_time_limit(0);
 	function setup_saveloadlist() {
-		define("SERVER","localhost");
-		define("USER","");
-		define("PASSWORD","");
-		define("DB","home");
+		$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+		define("SERVER", $url['host']);
+		define("USER", $url['user']);
+		define("PASSWORD", $url['pass']);
+		define("DB", substr($url["path"], 1));
 		define("TABLE","wwwsqldesigner");
 	}
 	function setup_import() {
-		define("SERVER","localhost");
-		define("USER","");
-		define("PASSWORD","");
+		$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+		define("SERVER", $url['host']);
+		define("USER", $url['user']);
+		define("PASSWORD", $url['pass']);
 		define("DB","information_schema");
 	}
 	class mysqlDB {
@@ -135,7 +137,7 @@
 			$arr[] = '</sql>';
 			return implode("\n",$arr);
 		}
- 	}
+	}
 
 
 	$a = (isset($_GET["action"]) ? $_GET["action"] : false);
@@ -163,7 +165,7 @@
 			$keyword = mysqli_real_escape_string($DBHandler->getLink(), $keyword);
 			$data = file_get_contents("php://input");
 			if (get_magic_quotes_gpc() || get_magic_quotes_runtime()) {
-			   $data = stripslashes($data);
+				 $data = stripslashes($data);
 			}
 			$data = mysqli_real_escape_string($DBHandler->getLink(), $data);
 			$r = mysqli_query($DBHandler->getLink(), "SELECT * FROM ".TABLE." WHERE keyword = '".$keyword."'");
