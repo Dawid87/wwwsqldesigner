@@ -3,14 +3,20 @@ body {
 	font-size: small;
 	padding: 0px;
 	margin: 0px;
-	background: url(../images/back.gif) fixed; 
+	background: #FFF;
 	visibility: hidden;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 #area {
 	position: relative;
-	width: 2000px;
-	height: 2000px;
+	background: transparent url(../images/back.png);
+	width: 3000px;
+	height: 3000px;
 }
 
 #controls {
@@ -205,8 +211,8 @@ body {
 }
 
 #textarea {
-	width: 600px;
-	height: 100px;
+	width: 650px;
+	height: 200px;
 }
 
 #opts {
